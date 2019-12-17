@@ -63,4 +63,17 @@ class ExchangeRates {
 
   }
 
+  public function range($date_start, $date_end, $format = 'array'){
+
+    $range_iterator = new RangeIterator($date_start,$date_end);
+    $range_generator = $range_iterator->getRange($this,$format);
+
+    while ($range_generator->valid()) {
+        yield $range_generator->current();
+
+        $range_generator->next();
+    }
+
+  }
+
 }
